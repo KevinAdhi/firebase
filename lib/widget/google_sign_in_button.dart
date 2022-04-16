@@ -34,7 +34,6 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                   _isSigningIn = true;
                 });
 
-                // TODO: Add a method call to the Google Sign-In authentication
                 User? user =
                     await Authentication.signInWithGoogle(context: context);
 

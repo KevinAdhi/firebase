@@ -4,12 +4,25 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:testfirebase/screens/user_info_screen.dart';
 
 class Authentication {
-  static Future<FirebaseApp> initializeFirebase() async {
+  static Future<FirebaseApp> initializeFirebase({
+    required BuildContext context,
+  }) async {
     FirebaseApp firebaseApp = await Firebase.initializeApp();
 
-    // TODO: Add auto login logic
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => UserInfoScreen(
+            user: user,
+          ),
+        ),
+      );
+    }
 
     return firebaseApp;
   }
